@@ -1,273 +1,254 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Malla Curricular - Ingeniería en Sistemas</title>
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 16px;
-  background: #f4f2f8;
-  color: #3a2e4f;
-  overflow: hidden;
-}
-h1 {
-  text-align: center;
-  color: #5c3d79;
-  margin: 0;
-  padding: 2rem 1rem 2rem 1rem; 
-  border-bottom: 1px solid #ddd;
-  font-size: 2.2rem;
-}
-.grid {
-  display: flex;
-  height: calc(100% - 70px);
-  overflow-x: auto;
-  padding: 1rem;
-  box-sizing: border-box;
-  gap: 1rem;
-}
-.column {
-  flex: 0 0 280px;
-  background: #e6dfef;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-.column h2 {
-  text-align: center;
-  margin: 0;
-  padding: 0.5rem;
-  font-size: 1.1rem;
-  color: #5c3d79;
-  border-bottom: 1px solid #d3cde0;
-}
-.materia {
-  width: 230px;
-  height: 120px;
-  margin: 0.5rem auto; 
-  padding: 0.9rem;
-  background: #d9cee9;
-  border-radius: 8px;
-  cursor: pointer;
-  position: relative;
-  font-size: 1.1rem;
-  text-align: center;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malla Curricular - Ingeniería en Sistemas</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f2f8;
+      color: #3a2e4f;
+      overflow: hidden;
+    }
 
- 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    h1 {
+      text-align: center;
+      color: #5c3d79;
+      margin: 0;
+      padding: 2.5rem 1rem;
+      font-size: 2.4rem;
+      border-bottom: 1px solid #ddd;
+    }
 
-  box-sizing: border-box;
-  transition: transform 0.3s ease;
-}
-.column:last-child .materia {
-  width: 230px;
-}
-.materia:hover {
-  background: #cfc3e3;
-}
-.materia.aprobada {
-  background: #9f85c1;
-  color: white;
-  text-decoration: line-through;
-}
-.materia.bloqueada {
-  background: #f0ebf6;
-  color: #aaa;
-  cursor: not-allowed;
-}
-.tooltip {
-  visibility: hidden;
-  opacity: 0;
-  background: #5c3d79;
-  color: white;
-  border-radius: 4px;
-  padding: 4px 6px;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 0.8rem;
-  transition: opacity 0.3s;
-  z-index: 1;
-}
-.materia:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-}
-</style>
+    .grid {
+      display: flex;
+      height: calc(100% - 100px);
+      overflow-x: auto;
+      padding: 1rem 1.5rem;
+      box-sizing: border-box;
+      gap: 1.5rem;
+      scroll-behavior: smooth;
+    }
+
+    .column {
+      flex: 0 0 300px;
+      background: #e6dfef;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 1rem;
+    }
+
+    .column h2 {
+      text-align: center;
+      margin: 0;
+      padding: 1rem 0;
+      font-size: 1.2rem;
+      color: #5c3d79;
+      border-bottom: 1px solid #d3cde0;
+      width: 100%;
+    }
+
+    .materia {
+      width: 230px;
+      height: 130px;
+      margin: 0.6rem auto;
+      padding: 1rem;
+      background: #d9cee9;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      font-size: 1.1rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      transition: transform 0.3s ease, background 0.3s;
+    }
+
+    .column:last-child .materia {
+      width: 250px;
+    }
+
+    .materia:hover {
+      background: #cfc3e3;
+    }
+
+    .materia.aprobada {
+      background: #9f85c1;
+      color: white;
+      text-decoration: line-through;
+    }
+
+    .materia.bloqueada {
+      background: #f0ebf6;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      background: #5c3d79;
+      color: white;
+      border-radius: 4px;
+      padding: 4px 6px;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.8rem;
+      transition: opacity 0.3s;
+      z-index: 1;
+    }
+
+    .materia:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
-<h1>Malla Curricular - Ingeniería en Sistemas</h1>
-<div class="grid" id="malla"></div>
+  <h1>Malla Curricular - Ingeniería en Sistemas</h1>
+  <div class="grid" id="malla"></div>
 
   <script>
     const data = [
-      {
-        ciclo: "Semestre 1",
-        materias: [
-          { codigo: "MAT101", nombre: "Cálculo I", requiere: [] },
-          { codigo: "INF110", nombre: "Introducción a la Informática", requiere: [] },
-          { codigo: "INF119", nombre: "Estructuras Discretas", requiere: [] },
-          { codigo: "FIS100", nombre: "Física I", requiere: [] },
-          { codigo: "LIN100", nombre: "Inglés Técnico I", requiere: [] }
-        ]
-      },
-      {
-        ciclo: "Semestre 2",
-        materias: [
-          { codigo: "MAT102", nombre: "Cálculo II", requiere: ["MAT101"] },
-          { codigo: "INF120", nombre: "Programación I", requiere: ["INF110"] },
-          { codigo: "MAT103", nombre: "Álgebra Lineal", requiere: ["INF119"] },
-          { codigo: "FIS102", nombre: "Física II", requiere: ["FIS100"] },
-          { codigo: "LIN101", nombre: "Inglés Técnico II", requiere: ["LIN100"] }
-        ]
-      },
-      {
-        ciclo: "Semestre 3",
-        materias: [
-          { codigo: "MAT207", nombre: "Ecuaciones Diferenciales", requiere: ["MAT102"] },
-          { codigo: "INF210", nombre: "Programación II", requiere: ["INF120", "MAT103"] },
-          { codigo: "INF211", nombre: "Arquitectura de Computadoras", requiere: ["INF120","FIS102"] },
-          { codigo: "FIN200", nombre: "Física III", requiere: ["FIS102"] },
-          { codigo: "ADM100", nombre: "Administración", requiere: [] }
-        ]
-      },
-      {
-        ciclo: "Semestre 4",
-        materias: [
-          { codigo: "MAT202", nombre: "Probabilidades y Estadísticas I", requiere: ["MAT102"] },
-          { codigo: "MAT205", nombre: "Métodos Numéricos", requiere: ["MAT207"] },
-          { codigo: "INF220", nombre: "Estructura de Datos I", requiere: ["INF210"] },
-          { codigo: "INF221", nombre: "Programación Ensamblador", requiere: ["INF211"] },
-          { codigo: "ADM200", nombre: "Contabilidad", requiere: ["ADM100"] }
-        ]
-      },
-      {
-        ciclo: "Semestre 5",
-        materias: [
-          { codigo: "MAT302", nombre: "Probabilidades y Estadísticas II", requiere: ["MAT202"] },
-          { codigo: "INF310", nombre: "Estructura de Datos II", requiere: ["INF220"] },
-          { codigo: "INF312", nombre: "Bases de Datos I", requiere: ["INF220"] },
-          { codigo: "ECO300", nombre: "Economía para la Gestión", requiere: ["ADM200"] },
-          { codigo: "ADM330", nombre: "Organización y Métodos", requiere: ["ADM200"] }
-        ]
-      },
-      {
-        ciclo: "Semestre 6",
-        materias: [
-          { codigo: "MAT329", nombre: "Investigación Operativa I", requiere: ["MAT302"] },
-          { codigo: "INF323", nombre: "Sistemas Operativos I", requiere: ["INF310"] },
-          { codigo: "INF322", nombre: "Base de Datos II", requiere: ["INF312"] },
-          { codigo: "INF342", nombre: "Sistemas de Información I", requiere: ["INF312"] },
-          { codigo: "ADM320", nombre: "Finanzas para la Empresa", requiere: ["ADM330"] }
-        ]
-      },
-      {
-        ciclo: "Semestre 7",
-        materias: [
-          { codigo: "MAT419", nombre: "Investigación Operativa II", requiere: ["MAT329"] },
-          { codigo: "INF433", nombre: "Redes I", requiere: ["INF323"] },
-          { codigo: "INF413", nombre: "Sistemas Operativos II", requiere: ["INF323"] },
-          { codigo: "INF412", nombre: "Sistemas de Información II", requiere: ["INF322","INF342"] },
-          { codigo: "INF432", nombre: "Soporte para la Toma de Decisiones", requiere: ["INF322","INF342"] }
-        ]
-      },
-      {
-        ciclo: "Semestre 8",
-        materias: [
-          { codigo: "ECO449", nombre: "Preparación y Evaluación de Proyectos", requiere: ["MAT419"] },
-          { codigo: "INF423", nombre: "Redes II", requiere: ["INF433"] },
-          { codigo: "INF442", nombre: "Sistemas de Información Geográfica", requiere: ["INF412"] },
-          { codigo: "INF422", nombre: "Ingeniería de Software I", requiere: ["INF412"] },
-          { codigo: "INF462", nombre: "Auditoría Informática", requiere: ["INF412","ADM320"] }
-        ]
-      },
-      {
-        ciclo: "Semestre 9",
-        materias: [
-          { codigo: "INF511", nombre: "Taller de Grado I", requiere: ["ECO449","INF462"] },
-          { codigo: "INF513", nombre: "Tecnología Web", requiere: ["INF423"] },
-          { codigo: "INF512", nombre: "Ingeniería de Software II", requiere: ["INF442"] },
-          { codigo: "INF552", nombre: "Arquitectura del Software*", requiere: ["INF422"] },
-        ]
-      },
-      {
-        ciclo: "Semestre 10",
-        materias: [
-          { codigo: "INF500", nombre: "Modalidad de Licenciatura", requiere: ["INF511","INF513","INF512","INF552"] },
-        ]
-      },
-      {
-        ciclo: "Electivas",
-        materias: [
-          { codigo: "ELEC001", nombre: "Administración de Recursos Humanos", requiere: [] },
-          { codigo: "ELEC002", nombre: "Costos y Presupuestos", requiere: [] },
-          { codigo: "ELEC003", nombre: "Producción y Marketing", requiere: [] },
-          { codigo: "ELEC006", nombre: "Benchmarking", requiere: [] },
-          { codigo: "ELEC008", nombre: "Legislación en Ciencias de la Computación", requiere: [] }
-        ]
-      }
+      { ciclo: "Semestre 1", materias: [
+        { codigo: "MAT101", nombre: "Cálculo I", requiere: [] },
+        { codigo: "INF110", nombre: "Introducción a la Informática", requiere: [] },
+        { codigo: "INF119", nombre: "Estructuras Discretas", requiere: [] },
+        { codigo: "FIS100", nombre: "Física I", requiere: [] },
+        { codigo: "LIN100", nombre: "Inglés Técnico I", requiere: [] }
+      ]},
+      { ciclo: "Semestre 2", materias: [
+        { codigo: "MAT102", nombre: "Cálculo II", requiere: ["MAT101"] },
+        { codigo: "INF120", nombre: "Programación I", requiere: ["INF110"] },
+        { codigo: "MAT103", nombre: "Álgebra Lineal", requiere: ["INF119"] },
+        { codigo: "FIS102", nombre: "Física II", requiere: ["FIS100"] },
+        { codigo: "LIN101", nombre: "Inglés Técnico II", requiere: ["LIN100"] }
+      ]},
+      { ciclo: "Semestre 3", materias: [
+        { codigo: "MAT207", nombre: "Ecuaciones Diferenciales", requiere: ["MAT102"] },
+        { codigo: "INF210", nombre: "Programación II", requiere: ["INF120", "MAT103"] },
+        { codigo: "INF211", nombre: "Arquitectura de Computadoras", requiere: ["INF120","FIS102"] },
+        { codigo: "FIN200", nombre: "Física III", requiere: ["FIS102"] },
+        { codigo: "ADM100", nombre: "Administración", requiere: [] }
+      ]},
+      { ciclo: "Semestre 4", materias: [
+        { codigo: "MAT202", nombre: "Probabilidades y Estadísticas I", requiere: ["MAT102"] },
+        { codigo: "MAT205", nombre: "Métodos Numéricos", requiere: ["MAT207"] },
+        { codigo: "INF220", nombre: "Estructura de Datos I", requiere: ["INF210"] },
+        { codigo: "INF221", nombre: "Programación Ensamblador", requiere: ["INF211"] },
+        { codigo: "ADM200", nombre: "Contabilidad", requiere: ["ADM100"] }
+      ]},
+      { ciclo: "Semestre 5", materias: [
+        { codigo: "MAT302", nombre: "Probabilidades y Estadísticas II", requiere: ["MAT202"] },
+        { codigo: "INF310", nombre: "Estructura de Datos II", requiere: ["INF220"] },
+        { codigo: "INF312", nombre: "Bases de Datos I", requiere: ["INF220"] },
+        { codigo: "ECO300", nombre: "Economía para la Gestión", requiere: ["ADM200"] },
+        { codigo: "ADM330", nombre: "Organización y Métodos", requiere: ["ADM200"] }
+      ]},
+      { ciclo: "Semestre 6", materias: [
+        { codigo: "MAT329", nombre: "Investigación Operativa I", requiere: ["MAT302"] },
+        { codigo: "INF323", nombre: "Sistemas Operativos I", requiere: ["INF310"] },
+        { codigo: "INF322", nombre: "Base de Datos II", requiere: ["INF312"] },
+        { codigo: "INF342", nombre: "Sistemas de Información I", requiere: ["INF312"] },
+        { codigo: "ADM320", nombre: "Finanzas para la Empresa", requiere: ["ADM330"] }
+      ]},
+      { ciclo: "Semestre 7", materias: [
+        { codigo: "MAT419", nombre: "Investigación Operativa II", requiere: ["MAT329"] },
+        { codigo: "INF433", nombre: "Redes I", requiere: ["INF323"] },
+        { codigo: "INF413", nombre: "Sistemas Operativos II", requiere: ["INF323"] },
+        { codigo: "INF412", nombre: "Sistemas de Información II", requiere: ["INF322","INF342"] },
+        { codigo: "INF432", nombre: "Soporte para la Toma de Decisiones", requiere: ["INF322","INF342"] }
+      ]},
+      { ciclo: "Semestre 8", materias: [
+        { codigo: "ECO449", nombre: "Preparación y Evaluación de Proyectos", requiere: ["MAT419"] },
+        { codigo: "INF423", nombre: "Redes II", requiere: ["INF433"] },
+        { codigo: "INF442", nombre: "Sistemas de Información Geográfica", requiere: ["INF412"] },
+        { codigo: "INF422", nombre: "Ingeniería de Software I", requiere: ["INF412"] },
+        { codigo: "INF462", nombre: "Auditoría Informática", requiere: ["INF412","ADM320"] }
+      ]},
+      { ciclo: "Semestre 9", materias: [
+        { codigo: "INF511", nombre: "Taller de Grado I", requiere: ["ECO449","INF462"] },
+        { codigo: "INF513", nombre: "Tecnología Web", requiere: ["INF423"] },
+        { codigo: "INF512", nombre: "Ingeniería de Software II", requiere: ["INF442"] },
+        { codigo: "INF552", nombre: "Arquitectura del Software*", requiere: ["INF422"] }
+      ]},
+      { ciclo: "Semestre 10", materias: [
+        { codigo: "INF500", nombre: "Modalidad de Licenciatura", requiere: ["INF511","INF513","INF512","INF552"] }
+      ]},
+      { ciclo: "Electivas", materias: [
+        { codigo: "ELEC001", nombre: "Administración de Recursos Humanos", requiere: [] },
+        { codigo: "ELEC002", nombre: "Costos y Presupuestos", requiere: [] },
+        { codigo: "ELEC003", nombre: "Producción y Marketing", requiere: [] },
+        { codigo: "ELEC006", nombre: "Benchmarking", requiere: [] },
+        { codigo: "ELEC008", nombre: "Legislación en Ciencias de la Computación", requiere: [] }
+      ]}
     ];
 
     const estado = JSON.parse(localStorage.getItem("estadoMaterias") || "{}");
-let materiasAprobadas = new Set(Object.keys(estado).filter(c => estado[c]));
+    let materiasAprobadas = new Set(Object.keys(estado).filter(c => estado[c]));
 
-function puedeAprobar(materia) {
-  return materia.requiere.every(r => materiasAprobadas.has(r));
-}
-function contarElectivas() {
-  return [...materiasAprobadas].filter(c => c.startsWith("ELEC")).length;
-}
-function render() {
-  const cont = document.getElementById("malla");
-  cont.innerHTML = "";
-  data.forEach(({ciclo, materias}) => {
-    const col = document.createElement("div");
-    col.className = "column";
-    col.innerHTML = `<h2>${ciclo}</h2>`;
-    materias.forEach(m => {
-      const div = document.createElement("div");
-      div.className = "materia";
-      div.textContent = m.nombre;
+    function puedeAprobar(materia) {
+      return materia.requiere.every(r => materiasAprobadas.has(r));
+    }
 
-      const aprobada = materiasAprobadas.has(m.codigo);
-      const puede = puedeAprobar(m);
-      const esElectiva = m.codigo.startsWith("ELEC");
+    function contarElectivas() {
+      return [...materiasAprobadas].filter(c => c.startsWith("ELEC")).length;
+    }
 
-      if (aprobada) div.classList.add("aprobada");
-      else if (!puede) {
-        div.classList.add("bloqueada");
-        const tt = document.createElement("span");
-        tt.className = "tooltip";
-        tt.textContent = "Falta: " + m.requiere.filter(r => !materiasAprobadas.has(r)).join(", ");
-        div.appendChild(tt);
-      }
+    function render() {
+      const cont = document.getElementById("malla");
+      cont.innerHTML = "";
+      data.forEach(({ ciclo, materias }) => {
+        const col = document.createElement("div");
+        col.className = "column";
+        col.innerHTML = `<h2>${ciclo}</h2>`;
+        materias.forEach(m => {
+          const div = document.createElement("div");
+          div.className = "materia";
+          div.textContent = m.nombre;
 
-      div.onclick = () => {
-        if (!puede && !aprobada) return;
-        if (esElectiva && !aprobada && contarElectivas() >= 4) return;
+          const aprobada = materiasAprobadas.has(m.codigo);
+          const puede = puedeAprobar(m);
+          const esElectiva = m.codigo.startsWith("ELEC");
 
-        estado[m.codigo] = !aprobada;
-        localStorage.setItem("estadoMaterias", JSON.stringify(estado));
-        materiasAprobadas = new Set(Object.keys(estado).filter(c => estado[c]));
-        render();
-      };
+          if (aprobada) div.classList.add("aprobada");
+          else if (!puede) {
+            div.classList.add("bloqueada");
+            const tt = document.createElement("span");
+            tt.className = "tooltip";
+            tt.textContent = "Falta: " + m.requiere.filter(r => !materiasAprobadas.has(r)).join(", ");
+            div.appendChild(tt);
+          }
 
-      col.appendChild(div);
-    });
-    cont.appendChild(col);
-  });
-}
-render();
-</script>
+          div.onclick = () => {
+            if (!puede && !aprobada) return;
+            if (esElectiva && !aprobada && contarElectivas() >= 4) return;
+
+            estado[m.codigo] = !aprobada;
+            localStorage.setItem("estadoMaterias", JSON.stringify(estado));
+            materiasAprobadas = new Set(Object.keys(estado).filter(c => estado[c]));
+            render();
+          };
+
+          col.appendChild(div);
+        });
+        cont.appendChild(col);
+      });
+    }
+
+    render();
+  </script>
 </body>
 </html>
+
