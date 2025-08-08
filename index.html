@@ -1,103 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Curricular - Ingeniería en Sistemas</title>
-  <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f8f4fb;
-    color: #3a2e4f;
-  }
-
-  h1 {
-    text-align: center;
-    color: #6a4c93;
-    margin: 0;
-    padding: 1rem 0 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .grid {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: calc(100% - 60px); /* Ajusta si tu header cambia de altura */
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-
-  .column {
-    flex: 0 0 200px;
-    background-color: #ece2f0;
-    border-radius: 10px;
-    padding: 1rem;
-  }
-
-  .column h2 {
-    text-align: center;
-    color: #5c3d79;
-  }
-
-  .materia {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 6px;
-    background-color: #d6c2e6;
-    cursor: pointer;
-    position: relative;
-    transition: background-color 0.3s ease;
-  }
-
-  .materia:hover {
-    background-color: #cbb2dd;
-  }
-
-  .materia.aprobada {
-    background-color: #a084ca;
-    color: white;
-    text-decoration: line-through;
-  }
-
-  .materia.bloqueada {
-    background-color: #eee5f3;
-    color: #aaa;
-    cursor: not-allowed;
-  }
-
-  .materia .tooltip {
-    visibility: hidden;
-    background-color: #5c3d79;
-    color: #fff;
-    text-align: center;
-    border-radius: 4px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    white-space: nowrap;
-    font-size: 0.75rem;
-  }
-
-  .materia:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Malla Curricular - Ingeniería en Sistemas</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f2f8;
+  color: #3a2e4f;
+  overflow: hidden;
+}
+h1 {
+  text-align: center;
+  color: #5c3d79;
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.grid {
+  display: flex;
+  height: calc(100% - 70px);
+  overflow-x: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+.column {
+  flex: 0 0 200px;
+  background: #e6dfef;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.column h2 {
+  text-align: center;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #5c3d79;
+  border-bottom: 1px solid #d3cde0;
+}
+.materia {
+  margin: 0.3rem;
+  padding: 0.5rem;
+  background: #d9cee9;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.materia:hover {
+  background: #cfc3e3;
+}
+.materia.aprobada {
+  background: #9f85c1;
+  color: white;
+  text-decoration: line-through;
+}
+.materia.bloqueada {
+  background: #f0ebf6;
+  color: #aaa;
+  cursor: not-allowed;
+}
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background: #5c3d79;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 6px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.75rem;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+.materia:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 </style>
 </head>
 <body>
-  <h1>Malla Curricular - Ingeniería en Sistemas</h1>
-  <div class="grid" id="malla"></div>
+<h1>Malla Curricular - Ingeniería en Sistemas</h1>
+<div class="grid" id="malla"></div>
 
   <script>
     const data = [
@@ -212,61 +207,55 @@
     ];
 
     const estado = JSON.parse(localStorage.getItem("estadoMaterias") || "{}");
-    let materiasAprobadas = new Set(Object.keys(estado).filter(cod => estado[cod]));
+let materiasAprobadas = new Set(Object.keys(estado).filter(c => estado[c]));
 
-    function puedeAprobar(materia) {
-      return materia.requiere.every(req => materiasAprobadas.has(req));
-    }
+function puedeAprobar(materia) {
+  return materia.requiere.every(r => materiasAprobadas.has(r));
+}
+function contarElectivas() {
+  return [...materiasAprobadas].filter(c => c.startsWith("ELEC")).length;
+}
+function render() {
+  const cont = document.getElementById("malla");
+  cont.innerHTML = "";
+  data.forEach(({ciclo, materias}) => {
+    const col = document.createElement("div");
+    col.className = "column";
+    col.innerHTML = `<h2>${ciclo}</h2>`;
+    materias.forEach(m => {
+      const div = document.createElement("div");
+      div.className = "materia";
+      div.textContent = m.nombre;
 
-    function contarElectivas() {
-      return [...materiasAprobadas].filter(cod => cod.startsWith("ELEC")).length;
-    }
+      const aprobada = materiasAprobadas.has(m.codigo);
+      const puede = puedeAprobar(m);
+      const esElectiva = m.codigo.startsWith("ELEC");
 
-    function render() {
-      const contenedor = document.getElementById("malla");
-      contenedor.innerHTML = "";
-      data.forEach(({ ciclo, materias }) => {
-        const col = document.createElement("div");
-        col.className = "column";
-        col.innerHTML = `<h2>${ciclo}</h2>`;
+      if (aprobada) div.classList.add("aprobada");
+      else if (!puede) {
+        div.classList.add("bloqueada");
+        const tt = document.createElement("span");
+        tt.className = "tooltip";
+        tt.textContent = "Falta: " + m.requiere.filter(r => !materiasAprobadas.has(r)).join(", ");
+        div.appendChild(tt);
+      }
 
-        materias.forEach(m => {
-          const div = document.createElement("div");
-          div.className = "materia";
-          div.textContent = m.nombre;
+      div.onclick = () => {
+        if (!puede && !aprobada) return;
+        if (esElectiva && !aprobada && contarElectivas() >= 4) return;
 
-          const aprobada = materiasAprobadas.has(m.codigo);
-          const puede = puedeAprobar(m);
-          const esElectiva = m.codigo.startsWith("ELEC");
+        estado[m.codigo] = !aprobada;
+        localStorage.setItem("estadoMaterias", JSON.stringify(estado));
+        materiasAprobadas = new Set(Object.keys(estado).filter(c => estado[c]));
+        render();
+      };
 
-          if (aprobada) div.classList.add("aprobada");
-          else if (!puede) {
-            div.classList.add("bloqueada");
-            const tooltip = document.createElement("span");
-            tooltip.className = "tooltip";
-            tooltip.textContent = "Falta: " + m.requiere.filter(r => !materiasAprobadas.has(r)).join(", ");
-            div.appendChild(tooltip);
-          }
-
-          div.onclick = () => {
-            if (!puede && !aprobada) return;
-
-            if (esElectiva && !aprobada && contarElectivas() >= 4) return;
-
-            estado[m.codigo] = !aprobada;
-            localStorage.setItem("estadoMaterias", JSON.stringify(estado));
-            materiasAprobadas = new Set(Object.keys(estado).filter(cod => estado[cod]));
-            render();
-          };
-
-          col.appendChild(div);
-        });
-
-        contenedor.appendChild(col);
-      });
-    }
-
-    render();
-  </script>
+      col.appendChild(div);
+    });
+    cont.appendChild(col);
+  });
+}
+render();
+</script>
 </body>
 </html>
