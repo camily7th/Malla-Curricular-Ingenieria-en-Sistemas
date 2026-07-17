@@ -129,76 +129,82 @@
   <script>
     const data = [
       { ciclo: "Semestre 1", materias: [
-        { codigo: "MAT101", nombre: "Cálculo I", requiere: [] },
-        { codigo: "INF110", nombre: "Introducción a la Informática", requiere: [] },
-        { codigo: "INF119", nombre: "Estructuras Discretas", requiere: [] },
-        { codigo: "FIS100", nombre: "Física I", requiere: [] },
-        { codigo: "LIN100", nombre: "Inglés Técnico I", requiere: [] }
+        { codigo: "ECO100", nombre: "Introducción a la Economía", requiere: [] },
+        { codigo: "MAT100", nombre: "Calculo I", requiere: [] },
+        { codigo: "CPA100", nombre: "Contabilidad I", requiere: [] },
+        { codigo: "CJS100", nombre: "Administración Tributaria", requiere: [] },
+        { codigo: "ADM100", nombre: "Administración I", requiere: [] },
+        { codigo: "INV100", nombre: "Introducción a la Investigación", requiere: [] }
       ]},
       { ciclo: "Semestre 2", materias: [
-        { codigo: "MAT102", nombre: "Cálculo II", requiere: ["MAT101"] },
-        { codigo: "INF120", nombre: "Programación I", requiere: ["INF110"] },
-        { codigo: "MAT103", nombre: "Álgebra Lineal", requiere: ["INF119"] },
-        { codigo: "FIS102", nombre: "Física II", requiere: ["FIS100"] },
-        { codigo: "LIN101", nombre: "Inglés Técnico II", requiere: ["LIN100"] }
+        { codigo: "ECO150", nombre: "Microeconomía I", requiere: ["ECO100", "MAT100"] },
+        { codigo: "MAT150", nombre: "Calculo II", requiere: ["MAT100"] },
+        { codigo: "CPA150", nombre: "Contabilidad II", requiere: ["CPA100"] },
+        { codigo: "ADM150", nombre: "Administración II", requiere: ["ADM100"] },
+        { codigo: "PSI150", nombre: "Psicología Social e Industrial", requiere: ["INV100"] }
       ]},
       { ciclo: "Semestre 3", materias: [
-        { codigo: "MAT207", nombre: "Ecuaciones Diferenciales", requiere: ["MAT102"] },
-        { codigo: "INF210", nombre: "Programación II", requiere: ["INF120", "MAT103"] },
-        { codigo: "INF211", nombre: "Arquitectura de Computadoras", requiere: ["INF120","FIS102"] },
-        { codigo: "FIN200", nombre: "Física III", requiere: ["FIS102"] },
-        { codigo: "ADM100", nombre: "Administración", requiere: [] }
+        { codigo: "ECO200", nombre: "Microeconomía II", requiere: ["ECO150", "MAT150"] },
+        { codigo: "MAT200", nombre: "Algebra Lineal y Teoría Matricial", requiere: ["MAT150"] },
+        { codigo: "MAT210", nombre: "Estadística I", requiere: ["MAT150"] },
+        { codigo: "CPA200", nombre: "Contabilidad III", requiere: ["CPA150"] },
+        { codigo: "ADM200", nombre: "Organización y Sistemas", requiere: ["ADM150"] }
       ]},
       { ciclo: "Semestre 4", materias: [
-        { codigo: "MAT202", nombre: "Probabilidades y Estadísticas I", requiere: ["MAT102"] },
-        { codigo: "MAT205", nombre: "Métodos Numéricos", requiere: ["MAT207"] },
-        { codigo: "INF220", nombre: "Estructura de Datos I", requiere: ["INF210"] },
-        { codigo: "INF221", nombre: "Programación Ensamblador", requiere: ["INF211"] },
-        { codigo: "ADM200", nombre: "Contabilidad", requiere: ["ADM100"] }
+        { codigo: "ECO250", nombre: "Macroeconomía I", requiere: ["ECO200", "MAT200"] },
+        { codigo: "MAT250", nombre: "Ingeniería Económica I", requiere: ["MAT200"] },
+        { codigo: "MAT260", nombre: "Estadística II", requiere: ["MAT210"] },
+        { codigo: "CPA250", nombre: "Costos I", requiere: ["CPA200", "CJS100"] },
+        { codigo: "CJS250", nombre: "Legislación Laboral y Emp.", requiere: ["CPA150"] },
+        { codigo: "ADM250", nombre: "Administración Pública", requiere: ["ADM200"] }
       ]},
       { ciclo: "Semestre 5", materias: [
-        { codigo: "MAT302", nombre: "Probabilidades y Estadísticas II", requiere: ["MAT202"] },
-        { codigo: "INF310", nombre: "Estructura de Datos II", requiere: ["INF220"] },
-        { codigo: "INF312", nombre: "Bases de Datos I", requiere: ["INF220"] },
-        { codigo: "ECO300", nombre: "Economía para la Gestión", requiere: ["ADM200"] },
-        { codigo: "ADM330", nombre: "Organización y Métodos", requiere: ["ADM200"] }
+        { codigo: "ECO100", nombre: "Teoría Monetaria y Fiscal", requiere: ["ECO250"] },
+        { codigo: "FIN300", nombre: "El Sistema Financiero", requiere: ["ECO200", "MAT250"] },
+        { codigo: "MAT300", nombre: "Ingeniería Económica II", requiere: ["MAT250"] },
+        { codigo: "IFI300", nombre: "Ingeniería Financiera I", requiere: ["CPA200"] },
+        { codigo: "PRE300", nombre: "Presupuesto y Control", requiere: ["CPA250"] },
+        { codigo: "CPA300", nombre: "Contabilidad Fiscal", requiere: ["CPA250"] }
       ]},
       { ciclo: "Semestre 6", materias: [
-        { codigo: "MAT329", nombre: "Investigación Operativa I", requiere: ["MAT302"] },
-        { codigo: "INF323", nombre: "Sistemas Operativos I", requiere: ["INF310"] },
-        { codigo: "INF322", nombre: "Base de Datos II", requiere: ["INF312"] },
-        { codigo: "INF342", nombre: "Sistemas de Información I", requiere: ["INF312"] },
-        { codigo: "ADM320", nombre: "Finanzas para la Empresa", requiere: ["ADM330"] }
+        { codigo: "ECO360", nombre: "Econometría", requiere: ["MAT300"] },
+        { codigo: "IFI360", nombre: "Análisis e Interp. de Estados Fin.", requiere: ["IFI301"] },
+        { codigo: "FIA350", nombre: "Finanzas Agropecuarias", requiere: ["CPA250", "IFI300"] },
+        { codigo: "IFI350", nombre: "Ingeniería Financiera II", requiere: ["IFI300"] },
+        { codigo: "CPA350", nombre: "Contabilidad Especiales", requiere: ["CPA250", "CPA300"] },
+        { codigo: "ADM350", nombre: "Administración de personal", requiere: ["CJS250"] }
       ]},
       { ciclo: "Semestre 7", materias: [
-        { codigo: "MAT419", nombre: "Investigación Operativa II", requiere: ["MAT329"] },
-        { codigo: "INF433", nombre: "Redes I", requiere: ["INF323"] },
-        { codigo: "INF413", nombre: "Sistemas Operativos II", requiere: ["INF323"] },
-        { codigo: "INF412", nombre: "Sistemas de Información II", requiere: ["INF322","INF342"] },
-        { codigo: "INF432", nombre: "Soporte para la Toma de Decisiones", requiere: ["INF322","INF342"] }
+        { codigo: "FIN300", nombre: "Marketing y Serv. Financiero", requiere: ["FIN300"] },
+        { codigo: "ECO400", nombre: "Prep. Y Eva. De Proyectos", requiere: ["PRE300","ECO360"] },
+        { codigo: "FIN400", nombre: "Finanzas, Banca Seg. y Pensiones", requiere: ["IFI360"] },
+        { codigo: "MOF400", nombre: "Modelación Financiera", requiere: ["IFI351"] },
+        { codigo: "FIC400", nombre: "Finanzas Corporativas I", requiere: ["IFI350"] },
+        { codigo: "FIN420", nombre: "Mercado de Valores", requiere: ["IFI350"] }
       ]},
       { ciclo: "Semestre 8", materias: [
-        { codigo: "ECO449", nombre: "Preparación y Evaluación de Proyectos", requiere: ["MAT419"] },
-        { codigo: "INF423", nombre: "Redes II", requiere: ["INF433"] },
-        { codigo: "INF442", nombre: "Sistemas de Información Geográfica", requiere: ["INF412"] },
-        { codigo: "INF422", nombre: "Ingeniería de Software I", requiere: ["INF412"] },
-        { codigo: "INF462", nombre: "Auditoría Informática", requiere: ["INF412","ADM320"] }
+        { codigo: "FIN470", nombre: "Sistema de Reg. Financiero", requiere: ["FIN300","FIN400"] },
+        { codigo: "CPA450", nombre: "Auditoria Financiera", requiere: ["CPA350","FIN400"] },
+        { codigo: "FIN450", nombre: "Diseño de Sistema Fin.", requiere: ["INF412"] },
+        { codigo: "FIC450", nombre: "Finanzas Corporativas II", requiere: ["FIC400"] },
+        { codigo: "FIN460", nombre: "Finanzas Internacionales", requiere: ["FIC400","FIN420"] },
+        { codigo: "FIN450", nombre: "Dis. de Sit. Financieros", requiere: ["FIC400","MOF400"] }
       ]},
       { ciclo: "Semestre 9", materias: [
-        { codigo: "INF511", nombre: "Taller de Grado I", requiere: ["ECO449","INF462"] },
-        { codigo: "INF513", nombre: "Tecnología Web", requiere: ["INF423"] },
-        { codigo: "INF512", nombre: "Ingeniería de Software II", requiere: ["INF442"] },
-        { codigo: "INF552", nombre: "Arquitectura del Software*", requiere: ["INF422"] }
+        { codigo: "IFI500", nombre: "Trabajo Final de Grado", requiere: ["FIN450","FIN470"] },
+        { codigo: "FIN520", nombre: "Teoría de las Decisiones", requiere: ["MOF400","FIN470"] },
+        { codigo: "FIN500", nombre: "Taller de Valor de la Empresa", requiere: ["MOF400","FIC450"] },
+        { codigo: "FIN510", nombre: "Juego de Bolsa", requiere: ["FIN420","FIC450"] },
+        { codigo: "FIN530", nombre: "Finanzas de las Pymes", requiere: ["IFI300","MOF400"] },
+        { codigo: "INV500", nombre: "Metodología de la Investigación", requiere: ["INV100","ECO360"] }
       ]},
       { ciclo: "Semestre 10", materias: [
-        { codigo: "INF500", nombre: "Modalidad de Licenciatura", requiere: ["INF511","INF513","INF512","INF552"] }
-      ]},
-      { ciclo: "Electivas", materias: [
-        { codigo: "ELEC001", nombre: "Administración de Recursos Humanos", requiere: [] },
-        { codigo: "ELEC002", nombre: "Costos y Presupuestos", requiere: [] },
-        { codigo: "ELEC003", nombre: "Producción y Marketing", requiere: [] },
-        { codigo: "ELEC006", nombre: "Benchmarking", requiere: [] },
-        { codigo: "ELEC008", nombre: "Legislación en Ciencias de la Computación", requiere: [] }
+        { codigo: "IFI500", nombre: "Tesis", requiere: ["IFI500","FIN520","FIN500","FIN510","FIN530","INV500"] },
+        { codigo: "IFI560", nombre: "Proyecto de Grado", requiere: ["IFI500","FIN520","FIN500","FIN510","FIN530","INV500"] },
+        { codigo: "IFI570", nombre: "Examen de Grado", requiere: ["IFI500","FIN520","FIN500","FIN510","FIN530","INV500"] },
+        { codigo: "IFI580", nombre: "Internado Rotatorio", requiere: ["IFI500","FIN520","FIN500","FIN510","FIN530","INV500"] },
+        { codigo: "IFI590", nombre: "Trabajo Dirigido", requiere: ["IFI500","FIN520","FIN500","FIN510","FIN530","INV500"] },
+        { codigo: "GDI600", nombre: "Graduación Directa", requiere: ["IFI500","FIN520","FIN500","FIN510","FIN530","INV500"] }
       ]}
     ];
 
